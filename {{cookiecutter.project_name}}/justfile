@@ -1,11 +1,20 @@
-tracking:
-    mlflow server --host 127.0.0.1 --port 8080
+tool_env := "uv run"
+python_env := "{{tool_env}} python"
 
-train:
-    echo train
+default:
+  @just --list
 
-eval:
-    echo test
+prefect:
+    {{tool_env}} prefect server start
 
-etl:
-    echo etl
+mlflow:
+    {{tool_env}} mlflow server --host 127.0.0.1 --port 8080
+
+train: mlflow
+    @echo train
+
+eval: mlflow
+    @echo test
+
+etl: prefect
+    {{python_env}} src/data/main.py
