@@ -1,0 +1,11 @@
+tracking:
+    mlflow server --host 127.0.0.1 --port 8080
+
+train:
+    echo train
+
+eval:
+    echo test
+
+etl:
+    echo etl
